@@ -23,13 +23,39 @@ public class MatrixUtil {
         final int matrixSize = matrixA.length;
         final int[][] matrixC = new int[matrixSize][matrixSize];
 
+//        int[][] transB = new int[matrixSize][matrixSize];
+//        for (int i = 0; i < matrixSize; i++) {
+//            for (int j = 0; j < matrixSize; j++) {
+//                transB[j][i] = transB[i][j];
+//            }
+//        }
+//
+//        for (int i = 0; i < matrixSize; i++) {
+//
+//            for (int j = 0; j < matrixSize; j++) {
+//                int sum = 0;
+//                for (int k = 0; k < matrixSize; k++) {
+//                    sum += matrixA[i][k] * transB[j][k];
+//                }
+//                matrixC[i][j] = sum;
+//            }
+//        }
+
+        int[] rowB = new int[matrixSize];
+
         for (int i = 0; i < matrixSize; i++) {
+
+            for (int k = 0; k < matrixSize; k++) {
+                rowB[k]=matrixB[k][i];
+            }
+
             for (int j = 0; j < matrixSize; j++) {
                 int sum = 0;
+                int[] rowA = matrixA[j];
                 for (int k = 0; k < matrixSize; k++) {
-                    sum += matrixA[i][k] * matrixB[k][j];
+                    sum += rowA[k]*rowB[k];
                 }
-                matrixC[i][j] = sum;
+                matrixC[j][i] = sum;
             }
         }
         return matrixC;
